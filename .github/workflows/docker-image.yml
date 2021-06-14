@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: DaaS Image CI
 
 on:
   push:
@@ -18,6 +18,9 @@ jobs:
       run: mkdir config
     - name: RHOAS auth and set api-gateway
       run: docker run -ti --rm -e TOKEN=${TOKEN} -e API_GATEWAY=${API_GATEWAY} -v config:/root/.config quay.io/tchughesiv/daas-rhoas login -t "${TOKEN}" --api-gateway "${API_GATEWAY}"
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
+        API_GATEWAY: ${{ secrets.API_GATEWAY }}
     - name: Decision list
       run: docker run -ti --rm -v config:/root/.config quay.io/tchughesiv/daas-rhoas decision list
     - name: Describe a decision
