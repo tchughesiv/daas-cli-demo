@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Make config dir
+      run: mkdir config
+    - name: RHOAS auth and set api-gateway
+      run: docker run -ti --rm -e TOKEN=${TOKEN} -e API_GATEWAY=${API_GATEWAY} -v config:/root/.config quay.io/tchughesiv/daas-rhoas login -t "${TOKEN}" --api-gateway "${API_GATEWAY}"
+    - name: Decision list
+      run: docker run -ti --rm -v config:/root/.config quay.io/tchughesiv/daas-rhoas decision list
+    - name: Describe a decision
+      run: docker run -ti --rm -v config:/root/.config quay.io/tchughesiv/daas-rhoas decision describe sumtest
