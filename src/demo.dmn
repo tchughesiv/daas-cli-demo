@@ -4,9 +4,9 @@
     <dmn:extensionElements/>
     <dmn:variable id="_AD13F532-C7B9-4C80-9E11-1CA2A1D11DC0" name="previous incidents?" typeRef="boolean"/>
   </dmn:inputData>
-  <dmn:inputData id="_0A5D0930-9B67-4F24-8095-77AE23A92B1F" name="ageTest">
+  <dmn:inputData id="_0A5D0930-9B67-4F24-8095-77AE23A92B1F" name="age">
     <dmn:extensionElements/>
-    <dmn:variable id="_D592469D-A705-4137-B8E8-B955ECA00B64" name="ageTest" typeRef="number"/>
+    <dmn:variable id="_D592469D-A705-4137-B8E8-B955ECA00B64" name="age" typeRef="number"/>
   </dmn:inputData>
   <dmn:decision id="_61C70FF9-E967-47AD-B786-8C41FA6E76C5" name="base price">
     <dmn:extensionElements/>
