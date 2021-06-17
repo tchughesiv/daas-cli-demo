@@ -1,0 +1,24 @@
+name: DaaS Image CI
+
+on:
+  push:
+    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
+
+jobs:
+  daas:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Make config dir
+      run: mkdir config
+    - name: RHOAS auth and api-gateway
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
+        API_GATEWAY: ${{ secrets.API_GATEWAY }}
+      run: docker run -t --rm -v config:/root/.config quay.io/kiegroup/rhoas login -t "${TOKEN}" --api-gateway "${API_GATEWAY}"
+    - name: Create Decision
+      run: docker run -t --rm -v config:/root/.config -v ${GITHUB_WORKSPACE}:/workspace quay.io/kiegroup/rhoas decision create gh-demo --descrip demo --dmn /workspace/src/demo.dmn
+#    - name: Describe a decision
+#      run: docker run -t --rm -v config:/root/.config quay.io/kiegroup/rhoas decision describe demo
