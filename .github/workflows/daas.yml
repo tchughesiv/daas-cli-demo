@@ -17,8 +17,8 @@ jobs:
       env:
         TOKEN: ${{ secrets.TOKEN }}
         API_GATEWAY: ${{ secrets.API_GATEWAY }}
-      run: docker run -t --rm -v config:/root/.config quay.io/kiegroup/rhoas login -t "${TOKEN}" --api-gateway "${API_GATEWAY}"
+      run: docker run -t --rm -v config:/root/.config quay.io/kiegroup/baaas-decision-cli login -t "${TOKEN}" --api-gateway "${API_GATEWAY}"
     - name: Create Decision
-      run: docker run -t --rm -v config:/root/.config -v ${GITHUB_WORKSPACE}:/workspace quay.io/kiegroup/rhoas decision create gh-demo --descrip demo --dmn /workspace/src/demo.dmn
+      run: docker run -t --rm -v config:/root/.config -v ${GITHUB_WORKSPACE}:/workspace quay.io/kiegroup/baaas-decision-cli decision create gh-demo --descrip demo --dmn /workspace/src/demo.dmn
 #    - name: Describe a decision
-#      run: docker run -t --rm -v config:/root/.config quay.io/kiegroup/rhoas decision describe demo
+#      run: docker run -t --rm -v config:/root/.config quay.io/kiegroup/baaas-decision-cli decision describe demo
